@@ -91,7 +91,7 @@ def get_api_config():
 # --- Cached RAG Pipeline Functions ---
 
 @st.cache_resource(show_spinner="Processing PDF and building knowledge base...")
-def process_pdf_and_create_vectorstore(uploaded_file, api_key, base_url):
+def process_pdf_and_create_vectorstore(_uploaded_file, api_key, base_url):
     """
     Process uploaded PDF and create the Chroma vector store.
     Caches the vector store based on file ID, API key, and base URL.
@@ -101,7 +101,7 @@ def process_pdf_and_create_vectorstore(uploaded_file, api_key, base_url):
         return None
 
     # Use BytesIO to handle the uploaded file content
-    bytes_data = uploaded_file.getvalue()
+    bytes_data = _uploaded_file.getvalue()
     
     # Create temporary file to pass to PyPDFLoader
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
@@ -135,16 +135,16 @@ def process_pdf_and_create_vectorstore(uploaded_file, api_key, base_url):
 
 
 @st.cache_resource(show_spinner=False)
-def create_rag_chain(vectorstore, model_name, api_key, base_url):
+def create_rag_chain(_vectorstore, model_name, api_key, base_url):
     """
     Creates the complete RAG chain runnable. Caches based on vectorstore (implicit),
     model name, API key, and base URL.
     """
-    if vectorstore is None:
+    if _vectorstore is None:
         return None
     
     # 1. Define Retriever
-    retriever = vectorstore.as_retriever()
+    retriever = _vectorstore.as_retriever()
 
     # 2. Define LLM
     # Use ChatOpenAI and dynamically set the base_url for provider routing
