@@ -1,7 +1,8 @@
 import streamlit as st
 import tempfile
 import os
-from langchain_community.document_loader import PyPDFLoader
+from io import BytesIO
+from langchain_community.document_loaders.pdf import PyPDFLoader
 from langchain_text_splitters import TokenTextSplitter
 from langchain_core.output_parsers.string import StrOutputParser
 from langchain_core.messages import SystemMessage
@@ -10,7 +11,6 @@ from langchain_core.runnables import RunnablePassthrough
 # We use ChatOpenAI/OpenAIEmbeddings for compatibility, configuring the base_url for different providers.
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_chroma.vectorstores import Chroma
-from io import BytesIO
 
 # --- Configuration ---
 PROVIDER_OPTIONS = ["OpenAI", "OpenRouter (for Multi-Model Access including Google)"]

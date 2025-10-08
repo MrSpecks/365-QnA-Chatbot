@@ -63,7 +63,17 @@ OPENROUTER_API_KEY = "sk-your-openrouter-api-key-here"
 
 **Note**: Copy the `.streamlit/secrets.toml.example` file and replace the placeholders with your actual API keys. You only need one API key depending on which provider you choose to use.
 
-### 4. Run the Application
+### 4. Test Your Installation (Optional but Recommended)
+
+Before running the app, test that all imports work correctly:
+
+```bash
+python test_imports.py
+```
+
+This will verify that all required packages are properly installed.
+
+### 5. Run the Application
 
 ```bash
 streamlit run streamlit_app.py
@@ -113,6 +123,7 @@ For production deployment, consider using:
 ```
 365-QnA-Chatbot/
 ├── streamlit_app.py               # Main Streamlit application
+├── test_imports.py                # Import testing script
 ├── requirements.txt                # Python dependencies
 ├── README.md                      # This file
 ├── .gitignore                     # Git ignore rules
@@ -125,12 +136,17 @@ For production deployment, consider using:
 
 ### Common Issues
 
-1. **API Key Error**: Ensure your API key is correctly set in `.streamlit/secrets.toml` or entered in the sidebar
-2. **Provider Selection**: Make sure you've selected the correct provider (OpenAI or OpenRouter) that matches your API key
-3. **Model Availability**: Some models may not be available on OpenRouter; try a different model if you encounter errors
-4. **PDF Processing Error**: Make sure the uploaded file is a valid PDF
-5. **Memory Issues**: Large PDFs may require more memory; consider reducing chunk size
-6. **Rate Limiting**: API providers have rate limits; consider upgrading your plan for heavy usage
+1. **Import Errors**: If you get `ModuleNotFoundError` during deployment:
+   - Run `python test_imports.py` locally to test imports
+   - Check that your `requirements.txt` has the correct package versions
+   - Ensure all LangChain packages are properly installed
+
+2. **API Key Error**: Ensure your API key is correctly set in `.streamlit/secrets.toml` or entered in the sidebar
+3. **Provider Selection**: Make sure you've selected the correct provider (OpenAI or OpenRouter) that matches your API key
+4. **Model Availability**: Some models may not be available on OpenRouter; try a different model if you encounter errors
+5. **PDF Processing Error**: Make sure the uploaded file is a valid PDF
+6. **Memory Issues**: Large PDFs may require more memory; consider reducing chunk size
+7. **Rate Limiting**: API providers have rate limits; consider upgrading your plan for heavy usage
 
 ### Performance Tips
 
